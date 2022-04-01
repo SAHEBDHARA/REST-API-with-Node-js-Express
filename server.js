@@ -3,6 +3,12 @@ const app = experss();
 
 const port = process.env.PORT || 3000;
 
+const courses = [
+    { name: 'course1', id: 1},
+    { name: 'course2', id: 2},
+    { name: 'course3', id: 3}
+]
+
 
 
 app.get('/',(req,res)=>{
@@ -11,12 +17,14 @@ app.get('/',(req,res)=>{
 
 
 app.get('/api/courses',(req,res)=>{
-res.send([1,2,3])
+res.send(courses)
 });
 
 app.get('/api/courses/:id',(req,res)=>{
-    res.send(req.params.id);
-})
+   const course = courses.find( c => c.id === parseInt(req.params.id));
+   if(!course) res.status(404).send('the course with the give ID was wrong ')
+   res.send(course);
+});
 
 
 app.listen(port, ()=> console.log(`the server is running in ${port}`))
