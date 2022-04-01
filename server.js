@@ -1,15 +1,22 @@
-const http = require('http');
-const server = http.createServer((req,res)=>{
-    if(req.url === '/'){
-        res.write('hello world');
-        res.end();
-    
-    }
-    if ( req.url === '/api/courses'){
-        res.write(JSON.stringify([1,3,4]));
-        res.end();
-    }
-})
-server.listen(3000);
+const experss = require("express");
+const app = experss();
 
-console.log("listing ....")
+const port = process.env.PORT || 3000;
+
+
+
+app.get('/',(req,res)=>{
+    res.send("hello world")
+});
+
+
+app.get('/api/courses',(req,res)=>{
+res.send([1,2,3])
+});
+
+app.get('/api/courses/:id',(req,res)=>{
+    res.send(req.params.id);
+})
+
+
+app.listen(port, ()=> console.log(`the server is running in ${port}`))
