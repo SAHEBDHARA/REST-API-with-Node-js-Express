@@ -1,8 +1,9 @@
 const experss = require("express");
+const Joi = require('joi');
 const app = experss();
 
 // middleware 
-app.use(express.json());
+ app.use(experss.json());
 
 const port = process.env.PORT || 3000;
 
@@ -29,9 +30,16 @@ app.get('/api/courses/:id',(req,res)=>{
    res.send(course);
 });
 
+
 // post request 
 
 app.post('/api/courses', (req,res)=>{
+
+    if(!req.body.name || req.body.name.length < 3){
+        res.status(400).send('valid name is required and should be minimum 3 characters')
+        return;
+
+    }
     const course = {
         id:courses.length + 1,
         name: req.body.name
@@ -39,6 +47,9 @@ app.post('/api/courses', (req,res)=>{
     courses.push(course);
     res.send(course);
 })
+
+
+
 
 
 app.listen(port, ()=> console.log(`the server is running in ${port}`))
