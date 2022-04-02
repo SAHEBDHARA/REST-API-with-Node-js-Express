@@ -20,6 +20,7 @@
   "homepage": "https://github.com/SAHEBDHARA/REST-API-with-Node-js-Express#readme",
   "dependencies": {
     "express": "^4.17.3",
+    "joi": "^17.6.0",
     "nodemon": "^2.0.15"
   }
 }
