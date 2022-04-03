@@ -43,7 +43,7 @@ app.post('/api/courses', (req,res)=>{
 
 
 
-    if(!req.body.name || req.body.name.length < 3){
+    if(result.error){
         res.status(400).send('valid name is required and should be minimum 3 characters')
         return;
 
@@ -57,8 +57,43 @@ app.post('/api/courses', (req,res)=>{
 })
 
 app.put('/api/courses/:id',(req,res) => {
+    // look up the course 
+    const course = courses.find( c => c.id === parseInt(req.params.id));
+   if(!course) res.status(404).send('the course with the give ID was wrong ')
+
+   
+   const schema = {
+    name: Joi.string().min(3).required()
+};
+// const result = Joi.ValidationError(req.body, schema);
+
+
+
+
+if(result.error){
+    res.status(400).send(result.error.details[0].message);
+    return;
+
+}
+const result =  validateCourse(req.body);
+const {error} =  validateCourse(req.body);
+
+course.name = req.body.name;
+res.send(course);
+
     
 })
+
+function    validateCourse (course){
+
+    const schema = {
+        name: Joi.string().min(3).required()
+    };
+    return Joi.Validate(course, schema);
+    
+    
+
+}
 
 
 
