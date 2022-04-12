@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const userRoute = require("./routes/user")
+const userRoute = require("./routes/user");
+const authRoute = require("./routes/auth");
 
 dotenv.config(); // to use env we have to config first 
 
@@ -26,13 +27,14 @@ app.get("/",(req,res)=>{
 })
 
 // creating user rout
-app.get("/user",(req,res)=>{
+app.get("/api/user",(req,res)=>{
     res.send("welcome to user page")
 })
 
 
 // using the routes
 app.use("/api/users",userRoute);
+app.use("/api/auth",authRoute);
  
 
 
