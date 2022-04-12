@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "experss": "^0.0.1-security",
+    "express": "^4.17.3",
     "helmet": "^5.0.2",
     "mongoose": "^6.2.10",
     "morgan": "^1.10.0",
