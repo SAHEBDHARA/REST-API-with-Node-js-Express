@@ -2,16 +2,14 @@
   "name": "rest-api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SAHEBDHARA/REST-API-with-Node-js-Express.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -19,8 +17,11 @@
   },
   "homepage": "https://github.com/SAHEBDHARA/REST-API-with-Node-js-Express#readme",
   "dependencies": {
-    "express": "^4.17.3",
-    "joi": "^17.6.0",
+    "dotenv": "^16.0.0",
+    "experss": "^0.0.1-security",
+    "helmet": "^5.0.2",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }
