@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/SAHEBDHARA/REST-API-with-Node-js-Express#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "experss": "^0.0.1-security",
     "express": "^4.17.3",
