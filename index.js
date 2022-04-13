@@ -11,10 +11,19 @@ dotenv.config(); // to use env we have to config first
 
 
 // this is the connection of mongoDB to server 
-mongoose.connect(process.env.MONGO_URL,
-    {useNewUrlParser: true},()=>{
-   console.log("server is connected to mongodb..")
-});
+// mongoose.connect(process.env.MONGO_URL,
+//     {useNewUrlParser: true},()=>{
+//    console.log("server is connected to mongodb..")
+// });
+// mogoose 
+mongoose.connect(
+    process.env.MONGO_URL,
+    {useNewUrlParser: true},
+    (err) => {
+     if(err) console.log(err) 
+     else console.log("mongdb is connected");
+    }
+  );
 
 // Middleware 
 app.use(express.json());

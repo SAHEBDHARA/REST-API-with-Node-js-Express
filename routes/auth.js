@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const User = require("../models/user")
 
-// resister
- router.post("/resister", async (req,res)=>{
+// resister rout
+ router.get("/resister", async (req,res)=>{
     const user = await new User ({
         username:"saheb",
         email:"sahebdhara@gmail.com",
@@ -13,8 +13,6 @@ const User = require("../models/user")
    res.send("ok")
    
 })
-// router.get("/resister", (req,res)=>{
-//     res.send("ok")
-// })
+
 
 module.exports = router;
