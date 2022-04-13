@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/user")
 
 // resister
- router.get("/resister", async (req,res)=>{
+ router.post("/resister", async (req,res)=>{
     const user = await new User ({
         username:"saheb",
         email:"sahebdhara@gmail.com",
