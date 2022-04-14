@@ -137,7 +137,8 @@ router.put("/:id/unfollow", async (req,res)=>{
     }else{
         res.status(403).json("you can't unfollow yourself")
     }
-})
+});
+
 
 
 module.exports = router;
