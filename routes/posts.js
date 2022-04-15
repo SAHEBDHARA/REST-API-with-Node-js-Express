@@ -1,6 +1,7 @@
 const router = require("express").Router();
+const { promise } = require("bcrypt/promises");
 const Post = require("../models/post");
-const { route } = require("./users");
+const User = require("../models/user");
 
 // Create a post 
 router.post("/", async (req,res)=>{
@@ -81,15 +82,19 @@ router.get("/:id", async (req,res)=>{
 
 // Get  timeline posts
 
-router.get("/timeline", async (req,res)=>{
-    let postArray = [];
-    try {
+router.get("/timeline/all", async(req,res)=>{
+ 
+    try{
         const currentUser = await User.findById(req.body.userId);
-        const userPosts = await Post.find({userId: currentUser._id});
-        const fri
-
+        const userPosts = await Post.find({ userId: currentUser._id});
+        const friendPosts = await Promise.all(
+            currentUser.followings.map(friendId=>{
+               return Post.find({userId:friendId})
+            })
+        );
+        res.json(userPosts.concat(...friendPosts))
     }catch(err){
-        res.status(500).json(err);
+        res.status(500).json(err)
     }
 })
 
