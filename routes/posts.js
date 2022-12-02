@@ -100,4 +100,3 @@ router.get("/timeline/:userId", async(req,res)=>{
 
 
 module.exports = router;
-//thsi is the new and notepad in the world and so on of the man makin in the worl
