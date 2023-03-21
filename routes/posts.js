@@ -10,9 +10,10 @@ router.post("/", async (req,res)=>{
         const savedPost = await newPost.save();
         res.status(200).json(savedPost)
     }catch(err){
-        res.status(500).json(err)
+        res.status(500).json(err);
+        console.log(err);
     }
-} )
+})
 
 
 // Update a post 
@@ -85,19 +86,36 @@ router.get("/:id", async (req,res)=>{
 router.get("/timeline/:userId", async(req,res)=>{
  
     try{
-        const currentUser = await User.findById(req.body.userId);
+        const currentUser = await User.findById(req.params.userId);
         const userPosts = await Post.find({ userId: currentUser._id});
         const friendPosts = await Promise.all(
-            currentUser.followings.map(friendId=>{
+            currentUser.followings.map((friendId) => {
                return Post.find({userId:friendId})
             })
+         
         );
         res.status(200).json(userPosts.concat(...friendPosts))//response.data.status
     }catch(err){
-        res.status(500).json(err)
+        res.status(409).json(err)
     }
-})
+});
+
+//Get all posts of an user 
+router.get("/profile/:username", async(req,res)=>{
+    
+    try{
+        const user = await User.findOne({username: req.params.username})
+        const posts = await Post.find({userId: user._id})
+
+        res.status(200).json(posts)
+
+    }catch(err){
+        res.status(409).json(err)
+    }
+});
+
+
+
 
 
 module.exports = router;
-// this is 

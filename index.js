@@ -39,6 +39,9 @@ app.get("/api/user",(req,res)=>{
     res.send("welcome to user page")
 })
 
+app.get("/api/posts",(req,res) =>{
+    res.send("this is user page")
+})
 
 // using the routes
 app.use("/api/users",userRoute);

@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 // resister rout  
  router.post("/resister", async (req,res)=>{
 
-
   try
   {
       // genetate new password 

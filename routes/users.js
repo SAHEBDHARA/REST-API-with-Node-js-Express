@@ -35,9 +35,6 @@ router.put("/:id", async(req,res)=>{
 
 // DELETE USER
 
-
-
-
 router.delete("/:id", async(req,res)=>{
     if(req.body.userId === req.params.id || req.body.isAdmin){  // chk the user id is same or not and the user should be admin
                                                                
@@ -64,10 +61,16 @@ router.delete("/:id", async(req,res)=>{
 
 // GET A USER
 
-router.get("/:id", async (req,res)=>{
+router.get("/", async (req,res)=>{
+    const userId = req.query.userId;
+    const username = req.query.username;
+
+
 
     try{
-        const user = await User.findById(req.params.id);// searching user using their id
+        const user = userId 
+        ? await User.findById(userId)
+        : await User.findOne({username:username});// searching user using their id
         const {password,updatedAt, ...other} = user._doc // this document carries all documents
 
         res.status(200).json(other);
@@ -88,7 +91,7 @@ router.put("/:id/follow", async (req,res)=>{
     if(req.body.userId !== req.params.id ){ // if they are not same users
 
         try{
-            const user = await User.findById(req.params.id); // the user which has the id in the link
+            const user = await User.findById(req.params.id); // the user which has the id in the url
             const currentUser = await User.findById(req.body.userId); // the user who is trying to make request
 
             if(!user.followers.includes(req.body.userId)){ // if the current user is not following the user
