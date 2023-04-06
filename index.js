@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const multer = require("multer")
 
 
 dotenv.config(); // to use env we have to config first 
@@ -28,6 +29,29 @@ mongoose.connect(
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '/FullStack/Social Medial/Rest Api/public')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+
+
+const upload = multer({storage: storage});
+
+app.post("/api/upload",upload.single("file"),(req,res)=>{
+    try {
+        return res.status(200).json("file uploaded")
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 // creating home rout 
 app.get("/",(req,res)=>{
