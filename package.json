@@ -19,9 +19,11 @@
   "homepage": "https://github.com/SAHEBDHARA/REST-API-with-Node-js-Express#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.36.1",
     "dotenv": "^16.0.0",
     "experss": "^0.0.1-security",
     "express": "^4.17.3",
+    "express-fileupload": "^1.4.0",
     "helmet": "^5.0.2",
     "mongoose": "^6.2.10",
     "morgan": "^1.10.0",

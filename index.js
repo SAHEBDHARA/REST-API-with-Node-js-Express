@@ -8,13 +8,25 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 // const multer = require("multer")
+// const fileUpload = require('express-fileupload') // new 
+const cloudinary = require('cloudinary');
+
+cloudinary.v2.config({
+  cloud_name: 'djunn67k4',
+  api_key: '417733636794263',
+  api_secret: 'aV0-qawBwds0xOZ01IYaxWq5I0Y',
+  secure: true,
+});
+
+
+
+
 
 
 dotenv.config(); // to use env we have to config first 
 
 
 
-//f
 
 
 
@@ -27,7 +39,13 @@ mongoose.connect(
     }
   );
 
+
+// app.use(fileUpload({
+//     useTempFiles:true
+// }))
+
 // Middleware 
+
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
@@ -35,6 +53,7 @@ app.use(morgan("common"));
 
 
 // const storage = multer.diskStorage({
+
 //     destination: function (req, file, cb) {
 //       cb(null, '/FullStack/Social Medial/Rest Api/public')
 //     },
@@ -57,7 +76,28 @@ app.use(morgan("common"));
 
 
 
+// creating upload request 
+
+app.post("/api/upload",(req,res,next)=>{
+    // const file = req.files.file;
+    // console.log(file)
+
+    // cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
+    //     console.log(result)
+    // })
+
+
+cloudinary.uploader
+ .upload("./public/images/ad.png")
+ .then(result=>console.log(result));
+})
+
+
+
 // creating home rout 
+
+
+
 app.get("/",(req,res)=>{
     res.send("this the homepage")
 })
