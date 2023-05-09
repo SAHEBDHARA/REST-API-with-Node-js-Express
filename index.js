@@ -122,3 +122,5 @@ app.use("/api/posts",postRoute);
 app.listen(4000,()=>{
     console.log("the server is running ..")
 }) 
+
+//jkhh
